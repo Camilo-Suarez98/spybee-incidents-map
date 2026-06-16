@@ -1,0 +1,120 @@
+@use "abstracts" as *;
+
+.menu {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 4px 6px;
+  border: none;
+  background: transparent;
+  border-radius: $radius-pill;
+  color: $color-text-invert;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba($color-text-invert, 0.1);
+  }
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+
+  @include below($bp-sm) {
+    display: none;
+  }
+}
+
+.name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.role {
+  font-size: 0.72rem;
+  color: rgba($color-text-invert, 0.6);
+}
+
+.caret {
+  color: rgba($color-text-invert, 0.6);
+
+  @include below($bp-sm) {
+    display: none;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 248px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  padding: $space-2;
+  z-index: $z-overlay;
+  animation: drop 0.16s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-2 $space-3;
+
+  .name {
+    color: $color-text;
+  }
+}
+
+.email {
+  font-size: 0.78rem;
+  color: $color-text-muted;
+}
+
+.divider {
+  height: 1px;
+  background: $color-border;
+  margin: $space-1 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  width: 100%;
+  padding: $space-2 $space-3;
+  border: none;
+  background: transparent;
+  border-radius: $radius-sm;
+  color: $color-text;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+
+  &:hover {
+    background: $color-surface-alt;
+  }
+}
+
+.danger {
+  color: $color-danger;
+
+  &:hover {
+    background: rgba($color-danger, 0.08);
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

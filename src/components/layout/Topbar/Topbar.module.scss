@@ -1,0 +1,76 @@
+@use "abstracts" as *;
+
+.topbar {
+  grid-area: header;
+  height: $header-height;
+  background: $color-header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $space-4;
+  gap: $space-4;
+  z-index: $z-header;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.burger {
+  display: none;
+
+  @include below($bp-md) {
+    display: inline-flex;
+  }
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  color: $color-text-invert;
+
+  @include below($bp-sm) {
+    display: none;
+  }
+}
+
+.projectDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-brand;
+}
+
+.projectName {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.bell {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-brand;
+    border: 2px solid $color-header;
+  }
+
+  @include below($bp-sm) {
+    display: none;
+  }
+}

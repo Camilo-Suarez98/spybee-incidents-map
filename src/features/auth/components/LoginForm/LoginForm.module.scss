@@ -1,0 +1,230 @@
+@use "abstracts" as *;
+
+.screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include below($bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $space-6;
+  padding: $space-10 clamp(#{$space-6}, 8vw, 96px);
+  background: $color-surface;
+}
+
+.brand {
+  display: none;
+
+  @include below($bp-md) {
+    display: block;
+  }
+}
+
+.heading {
+  h1 {
+    font-size: 1.7rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin-top: $space-2;
+    color: $color-text-muted;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: $color-danger;
+  background: rgba($color-danger, 0.08);
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.accountsLabel {
+  position: relative;
+  text-align: center;
+  font-size: 0.78rem;
+  color: $color-text-soft;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 18%;
+    height: 1px;
+    background: $color-border;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+.accountList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  width: 100%;
+  padding: $space-2 $space-3;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.05s ease;
+
+  &:hover:not(:disabled) {
+    border-color: $color-brand;
+    box-shadow: $shadow-xs;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.995);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.accountName {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: $color-text;
+}
+
+.accountRole {
+  font-size: 0.78rem;
+  color: $color-text-muted;
+}
+
+.accountArrow {
+  color: $color-text-soft;
+  flex-shrink: 0;
+}
+
+.accountSpinner {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 2px solid rgba($color-text, 0.15);
+  border-top-color: $color-brand;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.aside {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: $space-10;
+  background:
+    radial-gradient(120% 120% at 100% 0%, rgba($color-brand, 0.22), transparent 55%),
+    linear-gradient(160deg, $color-header 0%, $color-sidebar 100%);
+  color: $color-text-invert;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    bottom: -80px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba($color-brand, 0.16);
+    filter: blur(10px);
+  }
+
+  @include below($bp-md) {
+    display: none;
+  }
+}
+
+.asideInner {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: rgba($color-text-invert, 0.78);
+    line-height: 1.6;
+  }
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  li {
+    position: relative;
+    padding-left: $space-6;
+    color: rgba($color-text-invert, 0.9);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: $color-brand;
+    }
+  }
+}

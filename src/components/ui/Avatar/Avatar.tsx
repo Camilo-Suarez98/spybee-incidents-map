@@ -17,8 +17,8 @@ export function Avatar({ person, size = 32 }: AvatarProps) {
     >
       <span className={styles.fallback}>{getInitials(person?.name || "")}</span>
       <Image
-        src={person?.avatarUrl}
-        alt={person?.name || "https://i.pravatar.cc/150?u=nicolas.fernandez"}
+        src={person?.avatarUrl || "https://i.pravatar.cc/150?u=nicolas.fernandez"}
+        alt={`${person?.name} avatar`}
         width={size}
         height={size}
         className={styles.image}

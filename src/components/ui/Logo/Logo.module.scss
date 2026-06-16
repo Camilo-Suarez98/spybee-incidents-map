@@ -1,0 +1,21 @@
+@use "abstracts" as *;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.wordmark {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.dark .wordmark {
+  color: $color-text;
+}
+
+.light .wordmark {
+  color: $color-text-invert;
+}

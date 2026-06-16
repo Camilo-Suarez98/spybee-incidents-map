@@ -1,0 +1,84 @@
+@use "abstracts" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.required {
+  color: $color-danger;
+  margin-left: 2px;
+}
+
+.control {
+  width: 100%;
+  height: 42px;
+  padding: 0 $space-3;
+  border: 1px solid $color-border-strong;
+  border-radius: $radius-md;
+  background: $color-surface;
+  color: $color-text;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: $color-text-soft;
+  }
+
+  &:hover {
+    border-color: $color-text-soft;
+  }
+
+  &:focus {
+    border-color: $color-brand;
+    @include focus-ring;
+  }
+}
+
+.textarea {
+  height: auto;
+  min-height: 104px;
+  padding: $space-3;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.selectWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  appearance: none;
+  padding-right: $space-8;
+  cursor: pointer;
+}
+
+.chevron {
+  position: absolute;
+  right: $space-3;
+  pointer-events: none;
+  color: $color-text-soft;
+  display: inline-flex;
+}
+
+.error {
+  font-size: 0.78rem;
+  color: $color-danger;
+}
+
+.invalid {
+  border-color: $color-danger;
+
+  &:focus {
+    @include focus-ring($color-danger);
+  }
+}

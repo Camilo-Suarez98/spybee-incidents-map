@@ -5,7 +5,7 @@ import { IconButton } from "@/components/ui/IconButton";
 import { BellIcon } from "@/components/ui/icons";
 import { UserMenu } from "@/components/layout/UserMenu";
 import { useAuthStore } from "@features/auth/store";
-import { seedIncidents } from "@features/incidents/data/incidents";
+import { useIncidentsStore } from "@features/incidents/store";
 import styles from "./Topbar.module.scss";
 
 function MenuGlyph() {
@@ -22,7 +22,12 @@ interface TopbarProps {
 
 export function Topbar({ onToggleMenu }: TopbarProps) {
   const user = useAuthStore((state) => state.user);
-  const projectName = seedIncidents[0]?.project.name ?? "Proyecto";
+  const projectName = useIncidentsStore((state) => {
+    const selected = state.incidents.find(
+      (incident) => incident.id === state.selectedId,
+    );
+    return (selected ?? state.incidents[0])?.project.name ?? "Proyecto";
+  });
 
   return (
     <header className={styles.topbar}>

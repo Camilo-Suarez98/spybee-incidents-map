@@ -3,7 +3,7 @@ import path from "node:path";
 
 const nextConfig: NextConfig = {
   sassOptions: {
-    loadPaths: [path.join(process.cwd(), "src/shared/styles")],
+    loadPaths: [path.join(process.cwd(), "src/components/styles")],
   },
   images: {
     remotePatterns: [

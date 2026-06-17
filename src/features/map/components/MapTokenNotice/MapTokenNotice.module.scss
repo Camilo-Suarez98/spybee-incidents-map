@@ -1,0 +1,78 @@
+@use "abstracts" as *;
+
+.notice {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-6;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      $color-bg,
+      $color-bg 18px,
+      rgba($color-text, 0.03) 18px,
+      rgba($color-text, 0.03) 36px
+    );
+}
+
+.card {
+  @include card;
+  max-width: 440px;
+  padding: $space-8;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  box-shadow: $shadow-md;
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  code {
+    background: $color-surface-alt;
+    padding: 1px 6px;
+    border-radius: $radius-sm;
+    font-size: 0.85em;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: $radius-lg;
+  background: $color-brand-soft;
+  color: $color-brand-dark;
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.code {
+  width: 100%;
+  background: $color-header;
+  color: $color-text-invert;
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  font-size: 0.82rem;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.hint {
+  font-size: 0.82rem;
+}

@@ -44,7 +44,10 @@ export function MapView() {
       zoom: 14.2,
       attributionControl: false,
     });
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "bottom-right");
+    map.addControl(
+      new mapboxgl.NavigationControl({ showCompass: true, visualizePitch: true }),
+      "bottom-right",
+    );
     map.on("click", (event) => {
       if (!placementRef.current) return;
       pickLocation({ lat: event.lngLat.lat, lng: event.lngLat.lng });

@@ -1,0 +1,117 @@
+@use "abstracts" as *;
+
+.topLeft {
+  position: absolute;
+  top: $space-4;
+  left: $space-4;
+  z-index: 15;
+}
+
+.topRight {
+  position: absolute;
+  top: $space-4;
+  right: $space-4;
+  z-index: 15;
+
+  @include below($bp-md) {
+    bottom: $space-4;
+    top: auto;
+    right: $space-4;
+  }
+}
+
+.hint {
+  position: absolute;
+  top: $space-5;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-2 $space-2 $space-3;
+  background: $color-header;
+  color: $color-text-invert;
+  border-radius: $radius-pill;
+  box-shadow: $shadow-md;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 30;
+  animation: drop 0.2s ease;
+
+  @include below($bp-sm) {
+    width: calc(100% - #{$space-6});
+    justify-content: space-between;
+  }
+}
+
+.hintIcon {
+  display: inline-flex;
+  color: $color-brand;
+}
+
+.hintClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: rgba($color-text-invert, 0.12);
+  color: $color-text-invert;
+
+  &:hover {
+    background: rgba($color-text-invert, 0.2);
+  }
+}
+
+.legend {
+  position: absolute;
+  left: $space-4;
+  bottom: $space-4;
+  padding: $space-3 $space-4;
+  background: rgba($color-surface, 0.94);
+  backdrop-filter: blur(4px);
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  z-index: 15;
+
+  @include below($bp-md) {
+    display: none;
+  }
+}
+
+.legendTitle {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.legendItems {
+  display: flex;
+  gap: $space-3;
+  margin-top: $space-2;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+.legendDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}

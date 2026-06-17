@@ -1,0 +1,74 @@
+@use "abstracts" as *;
+
+.wrap {
+  overflow-x: auto;
+  @include scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  min-width: 720px;
+
+  thead th {
+    text-align: left;
+    padding: 0 $space-4 $space-3;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $color-text-soft;
+    font-weight: 600;
+    border-bottom: 1px solid $color-border;
+  }
+
+  tbody td {
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $color-border;
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: $color-surface-alt;
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.titleCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 280px;
+}
+
+.seq {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: $color-text-soft;
+  letter-spacing: 0.03em;
+}
+
+.title {
+  font-weight: 600;
+  color: $color-text;
+  @include truncate;
+}
+
+.muted {
+  color: $color-text-muted;
+  white-space: nowrap;
+}
+
+.owner {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  white-space: nowrap;
+}

@@ -1,0 +1,105 @@
+@use "abstracts" as *;
+
+.view {
+  height: 100%;
+  overflow-y: auto;
+  padding: $space-6 $space-8 $space-10;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  @include scrollbar;
+
+  @include below($bp-md) {
+    padding: $space-4 $space-4 $space-8;
+    gap: $space-4;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-5;
+  flex-wrap: wrap;
+
+  h1 {
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+
+    @include below($bp-md) {
+      font-size: 1.35rem;
+    }
+  }
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-brand-dark;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  margin-top: $space-2;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+  max-width: 520px;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+
+  @include below($bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include below($bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-4;
+
+  @include below($bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.donutPanel {
+  grid-column: span 7;
+
+  @include below($bp-lg) {
+    grid-column: auto;
+  }
+}
+
+.priorityPanel {
+  grid-column: span 5;
+
+  @include below($bp-lg) {
+    grid-column: auto;
+  }
+}
+
+.trendPanel {
+  grid-column: span 7;
+
+  @include below($bp-lg) {
+    grid-column: auto;
+  }
+}
+
+.typesPanel {
+  grid-column: span 5;
+
+  @include below($bp-lg) {
+    grid-column: auto;
+  }
+}

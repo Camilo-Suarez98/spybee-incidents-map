@@ -1,0 +1,1 @@
+export { RecentIncidentsTable } from "./RecentIncidentsTable";

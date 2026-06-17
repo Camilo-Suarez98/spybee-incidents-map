@@ -1,0 +1,29 @@
+@use "abstracts" as *;
+
+.panel {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  padding: $space-5;
+}
+
+.header {
+  @include flex-between;
+  gap: $space-3;
+  margin-bottom: $space-5;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.body {
+  flex: 1;
+}

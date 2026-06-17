@@ -45,17 +45,6 @@ export function DashboardView() {
     [filtered, t, locale],
   );
 
-  const recent = useMemo(
-    () =>
-      [...filtered]
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
-        .slice(0, 8),
-    [filtered],
-  );
-
   const projectName =
     incidents[0]?.project.name ?? t.topbar.projectFallback;
 
@@ -112,7 +101,7 @@ export function DashboardView() {
           />
         </Panel>
 
-        <Panel title={t.dashboard.byPriorityTitle} className={styles.priorityPanel}>
+        <Panel title={t.dashboard.byPriorityTitle} subtitle={t.dashboard.byPrioritySubtitle} className={styles.priorityPanel}>
           <BarList segments={metrics.byPriority} />
         </Panel>
 
@@ -124,16 +113,13 @@ export function DashboardView() {
           <TrendChart points={metrics.trend} />
         </Panel>
 
-        <Panel title={t.dashboard.topTypesTitle} className={styles.typesPanel}>
+        <Panel title={t.dashboard.topTypesTitle} subtitle={t.dashboard.topTypesSubtitle} className={styles.typesPanel}>
           <BarList segments={metrics.byType} />
         </Panel>
       </section>
 
-      <Panel
-        title={t.dashboard.recentTitle}
-        subtitle={t.dashboard.recentSubtitle(recent.length, filtered.length)}
-      >
-        <RecentIncidentsTable incidents={recent} />
+      <Panel title={t.dashboard.recentTitle}>
+        <RecentIncidentsTable incidents={filtered} />
       </Panel>
     </div>
   );

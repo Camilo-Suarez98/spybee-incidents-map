@@ -79,11 +79,13 @@ export const en: Dictionary = {
     byStatusTitle: "Status distribution",
     byStatusSubtitle: "Share of incidents by status",
     byPriorityTitle: "By priority",
+    byPrioritySubtitle: "Share of incidents by priority",
     trendTitle: "Creation trend",
     trendSubtitle: "Incidents created per month",
     topTypesTitle: "Top disciplines",
+    topTypesSubtitle: "Share of incidents by discipline",
     donutCenter: "incidents",
-    recentTitle: "Recent incidents",
+    recentTitle: "Incidents",
     recentSubtitle: (shown: number, total: number) =>
       `Showing ${shown} of ${total}`,
     trendEmpty: "No trend data.",
@@ -103,6 +105,14 @@ export const en: Dictionary = {
     created: "Created",
     emptyTitle: "No incidents",
     emptyDesc: "No incident matches the selected filters.",
+    range: (from: number, to: number, total: number) =>
+      `Showing ${from}–${to} of ${total}`,
+    sortBy: (column: string) => `Sort by ${column}`,
+  },
+  pagination: {
+    prev: "Previous",
+    next: "Next",
+    page: (current: number, total: number) => `Page ${current} of ${total}`,
   },
   mapToolbar: {
     viewDetails: "View details",

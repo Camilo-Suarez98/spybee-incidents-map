@@ -78,11 +78,13 @@ export const es = {
     byStatusTitle: "Distribución por estado",
     byStatusSubtitle: "Proporción de incidencias según su estado",
     byPriorityTitle: "Por prioridad",
+    byPrioritySubtitle: "Proporción de incidencias según prioridad",
     trendTitle: "Tendencia de creación",
     trendSubtitle: "Incidencias registradas por mes",
     topTypesTitle: "Top disciplinas",
+    topTypesSubtitle: "Proporción de incidencias según disciplina",
     donutCenter: "incidencias",
-    recentTitle: "Incidencias recientes",
+    recentTitle: "Incidencias",
     recentSubtitle: (shown: number, total: number) =>
       `Mostrando ${shown} de ${total}`,
     trendEmpty: "Sin datos de tendencia.",
@@ -102,6 +104,14 @@ export const es = {
     created: "Creada",
     emptyTitle: "No hay incidencias",
     emptyDesc: "Ninguna incidencia coincide con los filtros seleccionados.",
+    range: (from: number, to: number, total: number) =>
+      `Mostrando ${from}–${to} de ${total}`,
+    sortBy: (column: string) => `Ordenar por ${column}`,
+  },
+  pagination: {
+    prev: "Anterior",
+    next: "Siguiente",
+    page: (current: number, total: number) => `Página ${current} de ${total}`,
   },
   mapToolbar: {
     viewDetails: "Ver detalles",

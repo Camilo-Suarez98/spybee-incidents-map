@@ -109,8 +109,6 @@ export const es = {
     sortBy: (column: string) => `Ordenar por ${column}`,
   },
   pagination: {
-    prev: "Anterior",
-    next: "Siguiente",
     page: (current: number, total: number) => `Página ${current} de ${total}`,
   },
   mapToolbar: {

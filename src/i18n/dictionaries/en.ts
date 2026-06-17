@@ -110,8 +110,6 @@ export const en: Dictionary = {
     sortBy: (column: string) => `Sort by ${column}`,
   },
   pagination: {
-    prev: "Previous",
-    next: "Next",
     page: (current: number, total: number) => `Page ${current} of ${total}`,
   },
   mapToolbar: {

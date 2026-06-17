@@ -151,9 +151,7 @@ export function RecentIncidentsTable({ incidents }: RecentIncidentsTableProps) {
             disabled={safePage <= 1}
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             leadingIcon={<ChevronRightIcon className={styles.flip} width={16} height={16} />}
-          >
-            {t.pagination.prev}
-          </Button>
+          />
           <span className={styles.pageInfo}>
             {t.pagination.page(safePage, totalPages)}
           </span>
@@ -163,9 +161,7 @@ export function RecentIncidentsTable({ incidents }: RecentIncidentsTableProps) {
             disabled={safePage >= totalPages}
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             trailingIcon={<ChevronRightIcon width={16} height={16} />}
-          >
-            {t.pagination.next}
-          </Button>
+          />
         </div>
       </div>
     </div>

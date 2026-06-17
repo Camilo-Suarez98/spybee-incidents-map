@@ -1,5 +1,11 @@
 @use "abstracts" as *;
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
 .wrap {
   overflow-x: auto;
   @include scrollbar;
@@ -20,6 +26,7 @@
     color: $color-text-soft;
     font-weight: 600;
     border-bottom: 1px solid $color-border;
+    white-space: nowrap;
   }
 
   tbody td {
@@ -70,5 +77,70 @@
   display: flex;
   align-items: center;
   gap: $space-2;
+  white-space: nowrap;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.sortActive {
+  color: $color-text;
+}
+
+.sortIcon {
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  .sortBtn:hover & {
+    opacity: 0.5;
+  }
+
+  .sortActive & {
+    opacity: 1;
+  }
+}
+
+.flip {
+  transform: rotate(180deg);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.range {
+  font-size: 0.82rem;
+  color: $color-text-muted;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.pageInfo {
+  font-size: 0.82rem;
+  color: $color-text-soft;
   white-space: nowrap;
 }

@@ -4,7 +4,7 @@ import {
   STATUS_META,
   STATUS_ORDER,
 } from "@features/incidents/constants";
-import { getTypeByKey, isOverdue } from "@features/incidents/utils";
+import { isOverdue } from "@features/incidents/utils";
 import type {
   Incident,
   IncidentPriority,
@@ -77,7 +77,10 @@ export function computeMetrics(
     IncidentPriority,
     number
   >;
-  const typeCount = new Map<string, number>();
+  const typeCount = new Map<
+    string,
+    { type: Incident["type"]; count: number }
+  >();
   const ownerCount = new Map<string, { avatarUrl: string; count: number }>();
 
   let approved = 0;
@@ -88,10 +91,12 @@ export function computeMetrics(
   incidents.forEach((incident) => {
     statusCount[incident.status] += 1;
     priorityCount[incident.priority] += 1;
-    typeCount.set(
-      incident.type.key,
-      (typeCount.get(incident.type.key) ?? 0) + 1,
-    );
+    const typeEntry = typeCount.get(incident.type.key) ?? {
+      type: incident.type,
+      count: 0,
+    };
+    typeEntry.count += 1;
+    typeCount.set(incident.type.key, typeEntry);
 
     const owner = ownerCount.get(incident?.owner?.name || "") ?? {
       avatarUrl: incident?.owner?.avatarUrl || "",
@@ -130,13 +135,13 @@ export function computeMetrics(
   }));
 
   const palette = ["#2563eb", "#fab915", "#a855f7", "#10b981", "#ef4444", "#0ea5e9"];
-  const byType: Segment[] = Array.from(typeCount.entries())
-    .sort((a, b) => b[1] - a[1])
+  const byType: Segment[] = Array.from(typeCount.values())
+    .sort((a, b) => b.count - a.count)
     .slice(0, 6)
-    .map(([key, value], index) => ({
-      key,
-      label: typeName(getTypeByKey(key), locale),
-      value,
+    .map(({ type, count }, index) => ({
+      key: type.key,
+      label: typeName(type, locale),
+      value: count,
       color: palette[index % palette.length],
     }));
 

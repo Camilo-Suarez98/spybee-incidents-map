@@ -9,10 +9,12 @@ import { TextField } from "@/components/ui/Field";
 import { ChevronRightIcon } from "@/components/ui/icons";
 import { useAuthStore } from "../../store";
 import { DEMO_ACCOUNTS } from "../../users";
+import { useT } from "@/i18n";
 import styles from "./LoginForm.module.scss";
 
 export function LoginForm() {
   const router = useRouter();
+  const t = useT();
   const signIn = useAuthStore((state) => state.signIn);
   const user = useAuthStore((state) => state.user);
   const hydrated = useAuthStore((state) => state.hydrated);
@@ -36,7 +38,7 @@ export function LoginForm() {
     setLoading(false);
     setPendingEmail(null);
     if (!result.ok) {
-      setError(result.message ?? "No fue posible iniciar sesión.");
+      setError(result.message ?? t.auth.signInError);
       return;
     }
     router.replace("/map");
@@ -62,24 +64,24 @@ export function LoginForm() {
         </div>
 
         <div className={styles.heading}>
-          <h1>Bienvenido de nuevo</h1>
-          <p>Gestiona las incidencias de tu obra desde un solo lugar.</p>
+          <h1>{t.auth.welcome}</h1>
+          <p>{t.auth.welcomeSubtitle}</p>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <TextField
             id="email"
-            label="Correo electrónico"
+            label={t.auth.emailLabel}
             type="email"
             autoComplete="email"
-            placeholder="tucorreo@empresa.com"
+            placeholder={t.auth.emailPlaceholder}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
           />
           <TextField
             id="password"
-            label="Contraseña"
+            label={t.auth.passwordLabel}
             type="password"
             autoComplete="current-password"
             placeholder="••••••••"
@@ -91,14 +93,12 @@ export function LoginForm() {
           {error && <p className={styles.error}>{error}</p>}
 
           <Button type="submit" fullWidth disabled={loading}>
-            {loading && !pendingEmail ? "Ingresando…" : "Iniciar sesión"}
+            {loading && !pendingEmail ? t.auth.signingIn : t.auth.signIn}
           </Button>
         </form>
 
         <div className={styles.accounts}>
-          <span className={styles.accountsLabel}>
-            Entra rápido con una cuenta de demostración
-          </span>
+          <span className={styles.accountsLabel}>{t.auth.demoLabel}</span>
           <ul className={styles.accountList}>
             {DEMO_ACCOUNTS.map((account) => (
               <li key={account.id}>
@@ -111,7 +111,9 @@ export function LoginForm() {
                   <Avatar person={account} size={38} />
                   <span className={styles.accountInfo}>
                     <span className={styles.accountName}>{account.name}</span>
-                    <span className={styles.accountRole}>{account.role}</span>
+                    <span className={styles.accountRole}>
+                      {t.roles[account.role] ?? account.role}
+                    </span>
                   </span>
                   {pendingEmail === account.email ? (
                     <span className={styles.accountSpinner} />
@@ -132,15 +134,12 @@ export function LoginForm() {
       <aside className={styles.aside}>
         <div className={styles.asideInner}>
           <Logo tone="light" size={28} />
-          <h2>Cada incidencia, en su lugar exacto.</h2>
-          <p>
-            Reporta fallas sobre el mapa del proyecto, asigna responsables y
-            mide el avance con un dashboard claro y en tiempo real.
-          </p>
+          <h2>{t.auth.asideTitle}</h2>
+          <p>{t.auth.asideText}</p>
           <ul className={styles.highlights}>
-            <li>Creación de incidencias geolocalizadas</li>
-            <li>Seguimiento por estado, prioridad y disciplina</li>
-            <li>Resumen ejecutivo del proyecto</li>
+            <li>{t.auth.highlight1}</li>
+            <li>{t.auth.highlight2}</li>
+            <li>{t.auth.highlight3}</li>
           </ul>
         </div>
       </aside>

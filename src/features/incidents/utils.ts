@@ -1,40 +1,47 @@
+import { dictionaries, getLocale } from "@/i18n";
+import { INTL_LOCALE } from "@/i18n/config";
 import { INCIDENT_TYPES } from "./constants";
 import type { Incident, IncidentType } from "./types";
 
-const dateFormatter = new Intl.DateTimeFormat("es-CO", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-});
+function dateFormatter(): Intl.DateTimeFormat {
+  return new Intl.DateTimeFormat(INTL_LOCALE[getLocale()], {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
 
-const dateTimeFormatter = new Intl.DateTimeFormat("es-CO", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-});
+function dateTimeFormatter(): Intl.DateTimeFormat {
+  return new Intl.DateTimeFormat(INTL_LOCALE[getLocale()], {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export function formatDate(value: string | null): string {
-  if (!value) return "Sin fecha";
-  return dateFormatter.format(new Date(value));
+  if (!value) return dictionaries[getLocale()].time.noDate;
+  return dateFormatter().format(new Date(value));
 }
 
 export function formatDateTime(value: string | null): string {
-  if (!value) return "Sin fecha";
-  return dateTimeFormatter.format(new Date(value));
+  if (!value) return dictionaries[getLocale()].time.noDate;
+  return dateTimeFormatter().format(new Date(value));
 }
 
 export function formatRelative(value: string): string {
+  const t = dictionaries[getLocale()].time;
   const diff = Date.now() - new Date(value).getTime();
   const days = Math.floor(diff / 86_400_000);
-  if (days <= 0) return "Hoy";
-  if (days === 1) return "Ayer";
-  if (days < 30) return `Hace ${days} días`;
+  if (days <= 0) return t.today;
+  if (days === 1) return t.yesterday;
+  if (days < 30) return t.daysAgo(days);
   const months = Math.floor(days / 30);
-  if (months < 12) return `Hace ${months} ${months === 1 ? "mes" : "meses"}`;
+  if (months < 12) return t.monthsAgo(months);
   const years = Math.floor(months / 12);
-  return `Hace ${years} ${years === 1 ? "año" : "años"}`;
+  return t.yearsAgo(years);
 }
 
 export function formatBytes(bytes: number): string {

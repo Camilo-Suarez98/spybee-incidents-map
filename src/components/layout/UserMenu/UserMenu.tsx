@@ -6,11 +6,13 @@ import { Avatar } from "@/components/ui/Avatar";
 import { ChevronDownIcon, LogoutIcon, UserIcon } from "@/components/ui/icons";
 import { useAuthStore } from "@features/auth/store";
 import type { AuthUser } from "@features/auth/types";
+import { useT } from "@/i18n";
 import styles from "./UserMenu.module.scss";
 
 export function UserMenu({ user }: { user: AuthUser }) {
   const router = useRouter();
   const signOut = useAuthStore((state) => state.signOut);
+  const t = useT();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,7 @@ export function UserMenu({ user }: { user: AuthUser }) {
         <Avatar person={user} size={32} />
         <span className={styles.identity}>
           <span className={styles.name}>{user.name}</span>
-          <span className={styles.role}>{user.role}</span>
+          <span className={styles.role}>{t.roles[user.role] ?? user.role}</span>
         </span>
         <ChevronDownIcon width={16} height={16} className={styles.caret} />
       </button>
@@ -57,8 +59,10 @@ export function UserMenu({ user }: { user: AuthUser }) {
           <div className={styles.divider} />
           <button type="button" className={styles.item} role="menuitem">
             <UserIcon width={18} height={18} />
-            <span>Mi perfil</span>
+            <span>{t.userMenu.profile}</span>
           </button>
+
+          <div className={styles.divider} />
           <button
             type="button"
             className={`${styles.item} ${styles.danger}`}
@@ -66,7 +70,7 @@ export function UserMenu({ user }: { user: AuthUser }) {
             onClick={handleSignOut}
           >
             <LogoutIcon width={18} height={18} />
-            <span>Cerrar sesión</span>
+            <span>{t.userMenu.signOut}</span>
           </button>
         </div>
       )}

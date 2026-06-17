@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { dictionaries, getLocale } from "@/i18n";
 import type { AuthUser } from "./types";
 import { DEMO_ACCOUNTS, findAccount } from "./users";
 
@@ -31,7 +32,7 @@ export const useAuthStore = create<AuthState>()(
         if (!account) {
           return {
             ok: false,
-            message: "Credenciales inválidas. Revisa el correo y la contraseña.",
+            message: dictionaries[getLocale()].auth.invalidCredentials,
           };
         }
         set({ user: account });

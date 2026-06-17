@@ -1,17 +1,18 @@
 import { Badge } from "@components/ui/Badge";
 import { PRIORITY_META, STATUS_META } from "../../constants";
 import type { IncidentPriority, IncidentStatus } from "../../types";
+import { useT } from "@/i18n";
 
 export function StatusBadge({ status }: { status: IncidentStatus }) {
-  const meta = STATUS_META[status];
+  const t = useT();
   return (
-    <Badge color={meta.color} variant="dot">
-      {meta.label}
+    <Badge color={STATUS_META[status].color} variant="dot">
+      {t.status[status]}
     </Badge>
   );
 }
 
 export function PriorityBadge({ priority }: { priority: IncidentPriority }) {
-  const meta = PRIORITY_META[priority];
-  return <Badge color={meta.color}>{meta.label}</Badge>;
+  const t = useT();
+  return <Badge color={PRIORITY_META[priority].color}>{t.priority[priority]}</Badge>;
 }

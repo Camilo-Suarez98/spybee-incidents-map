@@ -1,0 +1,48 @@
+@use "abstracts" as *;
+
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 3px 3px 8px;
+  border-radius: $radius-pill;
+  background: rgba($color-text-invert, 0.1);
+
+  @include below($bp-sm) {
+    padding: 3px;
+  }
+}
+
+.globe {
+  color: rgba($color-text-invert, 0.7);
+  margin-right: 2px;
+
+  @include below($bp-sm) {
+    display: none;
+  }
+}
+
+.option {
+  border: none;
+  background: transparent;
+  border-radius: $radius-pill;
+  padding: 4px 9px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: rgba($color-text-invert, 0.65);
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: $color-text-invert;
+  }
+}
+
+.active {
+  background: $color-brand;
+  color: $color-header;
+
+  &:hover {
+    color: $color-header;
+  }
+}

@@ -4,8 +4,10 @@ import { Logo } from "@/components/ui/Logo";
 import { IconButton } from "@/components/ui/IconButton";
 import { BellIcon } from "@/components/ui/icons";
 import { UserMenu } from "@/components/layout/UserMenu";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { useAuthStore } from "@features/auth/store";
 import { useIncidentsStore } from "@features/incidents/store";
+import { useT } from "@/i18n";
 import styles from "./Topbar.module.scss";
 
 function MenuGlyph() {
@@ -21,19 +23,22 @@ interface TopbarProps {
 }
 
 export function Topbar({ onToggleMenu }: TopbarProps) {
+  const t = useT();
   const user = useAuthStore((state) => state.user);
   const projectName = useIncidentsStore((state) => {
     const selected = state.incidents.find(
       (incident) => incident.id === state.selectedId,
     );
-    return (selected ?? state.incidents[0])?.project.name ?? "Proyecto";
+    return (
+      (selected ?? state.incidents[0])?.project.name ?? t.topbar.projectFallback
+    );
   });
 
   return (
     <header className={styles.topbar}>
       <div className={styles.left}>
         <span className={styles.burger}>
-          <IconButton label="Abrir menú" tone="light" onClick={onToggleMenu}>
+          <IconButton label={t.topbar.openMenu} tone="light" onClick={onToggleMenu}>
             <MenuGlyph />
           </IconButton>
         </span>
@@ -46,8 +51,9 @@ export function Topbar({ onToggleMenu }: TopbarProps) {
       </div>
 
       <div className={styles.right}>
+        <LanguageSwitcher />
         <span className={styles.bell}>
-          <IconButton label="Notificaciones" tone="light">
+          <IconButton label={t.topbar.notifications} tone="light">
             <BellIcon />
           </IconButton>
         </span>

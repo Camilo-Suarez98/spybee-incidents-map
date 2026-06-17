@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./globals.scss";
+import { LocaleHtmlSync } from "@/i18n/LocaleHtmlSync";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -20,7 +21,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <LocaleHtmlSync />
+        {children}
+      </body>
     </html>
   );
 }

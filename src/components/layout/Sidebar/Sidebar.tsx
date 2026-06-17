@@ -10,12 +10,8 @@ import {
   LayersIcon,
   SettingsIcon,
 } from "@/components/ui/icons";
+import { useT } from "@/i18n";
 import styles from "./Sidebar.module.scss";
-
-const NAV_ITEMS = [
-  { href: "/map", label: "Mapa", icon: MapIcon },
-  { href: "/dashboard", label: "Dashboard", icon: GridIcon },
-];
 
 interface SidebarProps {
   open: boolean;
@@ -24,6 +20,12 @@ interface SidebarProps {
 
 export function Sidebar({ open, onNavigate }: SidebarProps) {
   const pathname = usePathname();
+  const t = useT();
+
+  const navItems = [
+    { href: "/map", label: t.nav.map, icon: MapIcon },
+    { href: "/dashboard", label: t.nav.dashboard, icon: GridIcon },
+  ];
 
   return (
     <aside className={`${styles.sidebar} ${open ? styles.open : ""}`}>
@@ -32,7 +34,7 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
       </div>
 
       <nav className={styles.nav}>
-        {NAV_ITEMS.map((item) => {
+        {navItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;
           return (
@@ -51,13 +53,13 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
       </nav>
 
       <div className={styles.bottom}>
-        <span className={styles.ghost} title="Capas">
+        <span className={styles.ghost} title={t.sidebar.layers}>
           <LayersIcon />
         </span>
-        <span className={styles.ghost} title="Notificaciones">
+        <span className={styles.ghost} title={t.sidebar.notifications}>
           <BellIcon />
         </span>
-        <span className={styles.ghost} title="Ajustes">
+        <span className={styles.ghost} title={t.sidebar.settings}>
           <SettingsIcon />
         </span>
       </div>

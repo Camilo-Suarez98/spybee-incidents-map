@@ -8,15 +8,33 @@ import {
   PRIORITY_ORDER,
   STATUS_ORDER,
 } from "@features/incidents/constants";
-import { useDashboardStore } from "@features/dashboard/store";
+import {
+  DEFAULT_TIME_PERIOD,
+  TIME_PERIOD_ORDER,
+  useDashboardStore,
+} from "@features/dashboard/store";
 import { useT, useLocale, typeName } from "@/i18n";
 import styles from "./DashboardFilters.module.scss";
 
 export function DashboardFilters() {
   const t = useT();
   const locale = useLocale();
-  const { status, priority, typeKey, setStatus, setPriority, setType, reset } =
-    useDashboardStore();
+  const {
+    status,
+    priority,
+    typeKey,
+    timePeriod,
+    setStatus,
+    setPriority,
+    setType,
+    setTimePeriod,
+    reset,
+  } = useDashboardStore();
+
+  const timePeriodOptions = TIME_PERIOD_ORDER.map((value) => ({
+    value,
+    label: t.filters.timePeriods[value],
+  }));
 
   const statusOptions = [
     { value: "all", label: t.filters.allStatuses },
@@ -36,10 +54,21 @@ export function DashboardFilters() {
     })),
   ];
 
-  const dirty = status !== "all" || priority !== "all" || typeKey !== "all";
+  const dirty =
+    status !== "all" ||
+    priority !== "all" ||
+    typeKey !== "all" ||
+    timePeriod !== DEFAULT_TIME_PERIOD;
 
   return (
     <div className={styles.filters}>
+      <SelectField
+        options={timePeriodOptions}
+        value={timePeriod}
+        onChange={(event) =>
+          setTimePeriod(event.target.value as typeof timePeriod)
+        }
+      />
       <span className={styles.icon}>
         <FilterIcon width={18} height={18} />
       </span>

@@ -32,7 +32,6 @@ export function RecentIncidentsTable({ incidents }: RecentIncidentsTableProps) {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [page, setPage] = useState(1);
 
-  // Reset to the first page when the dataset changes (e.g. filters applied).
   const [prevIncidents, setPrevIncidents] = useState(incidents);
   if (incidents !== prevIncidents) {
     setPrevIncidents(incidents);

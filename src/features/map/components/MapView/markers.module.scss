@@ -1,7 +1,5 @@
 @use "abstracts" as *;
 
-// Root element: Mapbox controls its `transform` to position the marker.
-// Never set a CSS transform here or the pin drifts on zoom/pan.
 .pin {
   --pin-color: #{$color-priority-medium};
   width: 26px;
@@ -9,7 +7,6 @@
   cursor: pointer;
 }
 
-// Inner wrapper: holds all visuals and animations/transforms.
 .body {
   position: relative;
   display: block;

@@ -94,6 +94,13 @@ export const es = {
     allPriorities: "Todas las prioridades",
     allDisciplines: "Todas las disciplinas",
     clear: "Limpiar",
+    timePeriods: {
+      "7d": "Últimos 7 días",
+      "15d": "Últimos 15 días",
+      "30d": "Últimos 30 días",
+      "90d": "Últimos 90 días",
+      "6m": "Últimos 6 meses",
+    },
   },
   table: {
     incident: "Incidencia",

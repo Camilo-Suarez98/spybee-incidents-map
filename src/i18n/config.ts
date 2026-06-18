@@ -9,7 +9,6 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   en: "English",
 };
 
-// BCP-47 tags used for Intl date/number formatting per locale.
 export const INTL_LOCALE: Record<Locale, string> = {
   es: "es-CO",
   en: "en-US",

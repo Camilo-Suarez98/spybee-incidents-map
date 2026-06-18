@@ -17,5 +17,4 @@ export const useLocaleStore = create<LocaleState>()(
   ),
 );
 
-// Non-hook accessor for use inside plain helpers (date/number formatters).
 export const getLocale = (): Locale => useLocaleStore.getState().locale;

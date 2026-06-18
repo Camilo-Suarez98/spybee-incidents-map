@@ -95,6 +95,13 @@ export const en: Dictionary = {
     allPriorities: "All priorities",
     allDisciplines: "All disciplines",
     clear: "Clear",
+    timePeriods: {
+      "7d": "Last 7 days",
+      "15d": "Last 15 days",
+      "30d": "Last 30 days",
+      "90d": "Last 90 days",
+      "6m": "Last 6 months",
+    },
   },
   table: {
     incident: "Incident",

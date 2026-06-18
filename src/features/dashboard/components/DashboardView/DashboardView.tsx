@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/icons";
 import { STATUS_META } from "@features/incidents/constants";
 import { useIncidentsStore } from "@features/incidents/store";
-import { useDashboardStore } from "@features/dashboard/store";
+import { useDashboardStore, timePeriodStart } from "@features/dashboard/store";
 import { computeMetrics } from "@features/dashboard/analytics";
 import { useT, useLocale } from "@/i18n";
 import { KpiCard } from "../KpiCard";
@@ -28,17 +28,18 @@ export function DashboardView() {
   const status = useDashboardStore((state) => state.status);
   const priority = useDashboardStore((state) => state.priority);
   const typeKey = useDashboardStore((state) => state.typeKey);
+  const timePeriod = useDashboardStore((state) => state.timePeriod);
 
-  const filtered = useMemo(
-    () =>
-      incidents.filter((incident) => {
-        if (status !== "all" && incident.status !== status) return false;
-        if (priority !== "all" && incident.priority !== priority) return false;
-        if (typeKey !== "all" && incident.type.key !== typeKey) return false;
-        return true;
-      }),
-    [incidents, status, priority, typeKey],
-  );
+  const filtered = useMemo(() => {
+    const periodStart = timePeriodStart(timePeriod);
+    return incidents.filter((incident) => {
+      if (new Date(incident.createdAt).getTime() < periodStart) return false;
+      if (status !== "all" && incident.status !== status) return false;
+      if (priority !== "all" && incident.priority !== priority) return false;
+      if (typeKey !== "all" && incident.type.key !== typeKey) return false;
+      return true;
+    });
+  }, [incidents, status, priority, typeKey, timePeriod]);
 
   const metrics = useMemo(
     () => computeMetrics(filtered, t, locale),
